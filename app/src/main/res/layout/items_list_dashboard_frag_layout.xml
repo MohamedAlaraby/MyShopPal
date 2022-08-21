@@ -33,10 +33,12 @@
     android:layout_height="wrap_content"
     android:background="@drawable/item_dashboard_background"
     android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
     >
 <ImageView
     android:id="@+id/iv_dashboard_item_image"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/item_dashboard_image_height"
     android:layout_margin="@dimen/item_dashboard_image_margin"
     android:contentDescription="@string/content_description"

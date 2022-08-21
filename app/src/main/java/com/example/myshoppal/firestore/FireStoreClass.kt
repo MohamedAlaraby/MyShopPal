@@ -21,10 +21,11 @@ import com.google.firebase.storage.StorageReference
 class FireStoreClass {
 
    private val mFirestore=FirebaseFirestore.getInstance()
+
    fun removeItemFromCart(context:Context,cart_id:String){
          mFirestore.collection(Constants.CART_ITEMS)
              .document(cart_id)
-             .get()
+             .delete()
              .addOnSuccessListener {
                  when(context){
                      is CartListActivity ->{
@@ -35,11 +36,8 @@ class FireStoreClass {
              .addOnFailureListener {
                  when(context){
                      is CartListActivity ->{
-                         context.removeItemFromCartSuccess()
                          context.hideProgressDialog()
                          Log.e(context.javaClass.simpleName,"Error while deleting cart item")
-
-
                      }
                  }
              }

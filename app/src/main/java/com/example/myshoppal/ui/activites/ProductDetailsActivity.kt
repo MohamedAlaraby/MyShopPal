@@ -11,7 +11,8 @@ import com.example.myshoppal.model.Product
 import com.example.myshoppal.utils.Constants
 import com.example.myshoppal.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_product_details.*
-class ProductDetailsActivity : BaseActivity(),View.OnClickListener {
+class ProductDetailsActivity : BaseActivity(),View.OnClickListener
+{
     private lateinit var mProductDetails: Product
     private var mProductID:String=""
     private var mProductOwnerID:String=""
@@ -65,7 +66,6 @@ class ProductDetailsActivity : BaseActivity(),View.OnClickListener {
        tv_product_details_description.text=product.description
        tv_product_details_available_quantity.text=product.stock_quantity
        if (product.stock_quantity.toInt() ==0){
-
            hideProgressDialog()
            btn_add_to_cart.visibility=View.GONE
            tv_product_details_available_quantity.text=resources.getString(R.string.lbl_out_of_stock)

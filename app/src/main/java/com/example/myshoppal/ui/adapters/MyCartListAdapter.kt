@@ -25,30 +25,34 @@ class MyCartListAdapter(
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
             val model=cartList[position]
             GlideLoader(context).loadProductPicture(model.image,holder.itemView.iv_cart_item_image)
-
-            holder.itemView.tv_cart_item_title.text=model.title
-            holder.itemView.tv_cart_item_price.text="$${model.price}"
-
-            holder.itemView.tv_cart_quantity.text=model.cart_quantity
-            if (model.cart_quantity=="0"){
-                holder.itemView.ib_add_cart_item.visibility=View.GONE
-                holder.itemView.ib_remove_cart_item.visibility=View.GONE
-                holder.itemView.tv_cart_quantity.text=context.resources.getString(R.string.lbl_out_of_stock)
-                holder.itemView.tv_cart_quantity.setTextColor(
-                    ContextCompat.getColor(
-                        context,R.color.colorSnackBarError
+             holder.itemView.apply {
+                 tv_cart_item_title.text=model.title
+                 tv_cart_item_price.text="$${model.price}"
+                 tv_cart_quantity.text=model.cart_quantity
+            }
+            if(model.cart_quantity=="0"){
+                holder.itemView.apply {
+                    ib_add_cart_item.visibility=View.GONE
+                    ib_remove_cart_item.visibility=View.GONE
+                    tv_cart_quantity.text=context.resources.getString(R.string.lbl_out_of_stock)
+                    tv_cart_quantity.setTextColor(
+                        ContextCompat.getColor(
+                            context,R.color.colorSnackBarError
+                        )
                     )
-                )
-
-            }else{
-                holder.itemView.ib_add_cart_item.visibility=View.VISIBLE
-                holder.itemView.ib_remove_cart_item.visibility=View.VISIBLE
-
-                holder.itemView.tv_cart_quantity.setTextColor(
-                    ContextCompat.getColor(
-                        context,R.color.colorSecondaryText
+                }
+            }
+            else
+            {
+                holder.itemView.apply {
+                    ib_add_cart_item.visibility=View.VISIBLE
+                    ib_remove_cart_item.visibility=View.VISIBLE
+                    tv_cart_quantity.setTextColor(
+                        ContextCompat.getColor(
+                            context,R.color.colorSecondaryText
+                        )
                     )
-                )
+                }
             }
             holder.itemView.ib_delete_cart_item.setOnClickListener {
                 when(context){
@@ -57,8 +61,6 @@ class MyCartListAdapter(
                         FireStoreClass().removeItemFromCart(context,model.id)
                     }
                 }
-
-
             }
 
     }

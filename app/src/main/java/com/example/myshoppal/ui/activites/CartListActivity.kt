@@ -30,6 +30,11 @@ class CartListActivity : BaseActivity() {
             onBackPressed()
         }
     }//setUpActionBar()
+    override fun onResume() {
+        super.onResume()
+        getAllProductsList()
+    }
+
     fun getCartListSuccess(cartList:ArrayList<CartItem>) {
         hideProgressDialog()
         for(product in mProductsList){
@@ -55,8 +60,8 @@ class CartListActivity : BaseActivity() {
         rv_cart_items_list.adapter=MyCartListAdapter(this@CartListActivity,mCartItemsList)
         var subTotal:Double=0.0
         for ( i in mCartItemsList){
-           val avilableQantity=i.stock_quantity.toInt()
-           if (avilableQantity>0){
+           val availableQuantity=i.stock_quantity.toInt()
+           if (availableQuantity > 0){
                subTotal+= (i.price.toDouble()) * (i.cart_quantity.toInt())
            }
         }
@@ -73,20 +78,11 @@ class CartListActivity : BaseActivity() {
             ll_checkout.visibility=View.GONE
         }
     }//getCartListSuccess()
-    fun removeItemFromCartSuccess(){
-         hideProgressDialog()
-         Toast.makeText(this@CartListActivity,resources.getString(R.string.msg_item_removed_successfully),Toast.LENGTH_LONG).show()
-         getCartItemsList()
-    }
     fun getCartItemsList(){
-        //   showProgressDialog(resources.getString(R.string.please_wait))
-           FireStoreClass().getCartList(this)
+        //showProgressDialog(resources.getString(R.string.please_wait))
+        FireStoreClass().getCartList(this)
     }
-    override fun onResume() {
-        super.onResume()
-       // getCartItemsList()
-        getAllProductsList()
-    }
+
     fun getAllProductsListSuccess(list:ArrayList<Product>){
         hideProgressDialog()
         mProductsList=list
@@ -96,5 +92,13 @@ class CartListActivity : BaseActivity() {
     fun getAllProductsList(){
         showProgressDialog(resources.getString(R.string.please_wait))
         FireStoreClass().getAllProductsList(this)
+    }
+
+    fun removeItemFromCartSuccess(){
+        hideProgressDialog()
+        Toast.makeText(this@CartListActivity,
+                    resources.getString(R.string.msg_item_removed_successfully),
+                    Toast.LENGTH_LONG).show()
+        getCartItemsList()
     }
 }
