@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_element_product_fragment"
+    android:background="@color/white"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_cart_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/cart_item_paddingStartEnd"
+    android:paddingTop="@dimen/cart_item_paddingTopBottom"
+    android:paddingEnd="@dimen/cart_item_paddingStartEnd"
+    android:paddingBottom="@dimen/cart_item_paddingTopBottom"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_dashboard_background"
+        android:padding="@dimen/cart_item_image_padding"
+        >
+
+        <ImageView
+            android:id="@+id/iv_cart_item_image"
+            android:layout_width="@dimen/cart_item_image_width"
+            android:layout_height="@dimen/cart_item_image_height"
+            android:background="@color/color_image_view_background"
+            android:contentDescription="@string/content_description"
+            android:scaleType="fitXY"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/cart_item_details_marginStart"
+        android:layout_marginEnd="@dimen/cart_item_details_marginEnd"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <com.example.myshoppal.utils.MSPTextViewRegular
+            android:id="@+id/tv_cart_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/item_value_text_color"
+            android:textSize="@dimen/cart_item_title_textSize"
+            tools:text="Cart Item Title"
+
+            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/update_cart_quantity_marginEnd"
+                android:gravity="end"
+                android:orientation="horizontal"
+                >
+                <com.example.myshoppal.utils.MSPTextViewBold
+                    android:id="@+id/tv_cart_item_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/item_value_text_color"
+                    android:textSize="@dimen/cart_item_price_textSize"
+                    android:textStyle="bold"
+                    tools:text="$100"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+
+                    />
+
+                <ImageButton
+                    android:id="@+id/ib_remove_cart_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/ic_vector_delete"
+                    android:src="@drawable/ic_vector_remove"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+
+                    />
+
+                <com.example.myshoppal.utils.MSPTextViewRegular
+                    android:id="@+id/tv_cart_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_grey_border_background"
+                    android:padding="5dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/cart_quantity_textSize"
+                    android:textStyle="bold"
+                    tools:text="1"
+                    android:layout_weight="1"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_add_cart_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ib_add_cart_item_marginStart"
+                    android:layout_marginEnd="@dimen/ib_add_cart_item_marginEnd"
+                    android:background="@android:color/transparent"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:contentDescription="@string/content_description"
+                    android:padding="@dimen/ib_cart_item_padding"
+                    android:src="@drawable/ic_vector_add"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    />
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ib_delete_cart_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/content_description"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/ib_cart_item_padding"
+        android:src="@drawable/ic_vector_delete"
+        android:visibility="visible"
+        tools:visibility="visible"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
+</androidx.cardview.widget.CardView>
+</RelativeLayout>
