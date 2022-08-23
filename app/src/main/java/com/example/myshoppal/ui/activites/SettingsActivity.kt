@@ -17,8 +17,11 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         setUpActionBar()
         btn_logout.setOnClickListener(this)
         tv_edit.setOnClickListener(this)
+        ll_address.setOnClickListener(this)
+
     }//on create method
     override fun onClick(v: View?) {
+
         if (v != null) {
             when (v.id) {
                 R.id.btn_logout ->
@@ -37,9 +40,13 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     intent.putExtra(Constants.EXTRA_USER_DETAILS, mUserDetails)
                     startActivity(intent)
                 }
+                R.id.ll_address->{
+                    startActivity(Intent(this@SettingsActivity,AddressListActivity::class.java))
+                }
             }
+
         }
-    }
+    }//on click()
 
 
 

@@ -29,9 +29,11 @@
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/ic_vector_shopping_cart.xml" value="0.203" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/item_dashboard_background.xml" value="0.173" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/item_grey_border_background.xml" value="0.1245" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/item_primary_color_border_background.xml" value="0.2" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/rv_item_image_background.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/user_image_background.xml" value="0.182" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_add_product.xml" value="0.25" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_address_list.xml" value="0.33" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_cart.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />

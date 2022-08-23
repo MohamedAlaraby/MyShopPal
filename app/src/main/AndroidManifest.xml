@@ -12,11 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyShopPal">
         <activity
+            android:name=".ui.activites.AddressListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            />
+        <activity
             android:name=".ui.activites.CartListActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
-            />
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".ui.activites.ProductDetailsActivity"
             android:exported="false"

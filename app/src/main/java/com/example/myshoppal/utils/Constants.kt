@@ -34,7 +34,8 @@ object Constants {
     const val DEFAULT_CART_QUANTITY="1"
 
     const val CART_ITEMS:String="cart_items"
-    const val   PRODUCT_ID:String="product_id"
+    const val CART_QUANTITY:String="cart_quantity"
+    const val PRODUCT_ID:String="product_id"
 
     const val PROFILE_COMPLETED: String="profileCompleted"
     const val USER_PROFILE_IMAGE:String="user_profile_image"

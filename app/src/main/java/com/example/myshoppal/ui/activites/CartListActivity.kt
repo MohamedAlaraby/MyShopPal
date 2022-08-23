@@ -101,4 +101,9 @@ class CartListActivity : BaseActivity() {
                     Toast.LENGTH_LONG).show()
         getCartItemsList()
     }
+
+    fun updateMyCartSuccess() {
+        hideProgressDialog()
+        getCartItemsList()
+    }
 }

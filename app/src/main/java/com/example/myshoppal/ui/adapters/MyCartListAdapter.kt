@@ -10,6 +10,7 @@ import com.example.myshoppal.firestore.FireStoreClass
 import com.example.myshoppal.model.CartItem
 import com.example.myshoppal.ui.activites.CartListActivity
 import com.example.myshoppal.ui.adapters.MyCartListAdapter.CartViewHolder
+import com.example.myshoppal.utils.Constants
 import com.example.myshoppal.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_cart_layout.view.*
 class MyCartListAdapter(
@@ -62,8 +63,52 @@ class MyCartListAdapter(
                     }
                 }
             }
+        holder.itemView.ib_remove_cart_item.setOnClickListener {
+            when(context){
+                is CartListActivity ->{
+                    if (model.cart_quantity=="1"){
+                       FireStoreClass().removeItemFromCart(context,model.id)
+                    }else{
+                        //if quantity greater than 1
+                        val cartQuantity=model.cart_quantity.toInt()
+                        val itemHashMap=HashMap<String,Any>()
+                        itemHashMap[Constants.CART_QUANTITY]=(cartQuantity-1).toString()
+                        context.showProgressDialog(context.resources.getString(R.string.please_wait))
+                        FireStoreClass().updateMyCart(context = context,
+                                               itemHashMap =itemHashMap,
+                                               cart_id = model.id
+                        )
+                    }
+                }
+            }
+        }
+        holder.itemView.ib_add_cart_item.setOnClickListener {
+            when(context){
+                is CartListActivity ->{
+                    val cartQuantity=model.cart_quantity.toInt()
+                        if (cartQuantity < model.stock_quantity.toInt()){
 
-    }
+                            val itemHashMap=HashMap<String,Any>()
+                            itemHashMap[Constants.CART_QUANTITY]=(cartQuantity+1).toString()
+                            context.showProgressDialog(context.resources.getString(R.string.please_wait))
+                            FireStoreClass().updateMyCart(context = context,
+                                itemHashMap =itemHashMap,
+                                cart_id = model.id
+                            )
+                        }else{
+                               context.showErrorSnackBar(
+                                   context.resources.getString(R.string.msg_for_available_stock,model.stock_quantity),
+                                   true)
+
+                        }
+
+
+                }
+            }
+        }
+
+
+    }//on bind()
     override fun getItemCount(): Int {
        return cartList.size
     }
