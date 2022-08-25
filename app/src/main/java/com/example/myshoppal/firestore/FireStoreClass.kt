@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.example.myshoppal.model.Address
 import com.example.myshoppal.model.CartItem
 import com.example.myshoppal.model.Product
 import com.example.myshoppal.model.User
@@ -21,6 +22,68 @@ import com.google.firebase.storage.StorageReference
 class FireStoreClass {
 
    private val mFirestore=FirebaseFirestore.getInstance()
+    fun updateAddress(activity: AddEditAddressActivity,address: Address,addressID:String){
+        mFirestore.collection(Constants.ADDRESSES)
+            .document(addressID)
+            .set(address, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addUpdateAddressSuccess()
+            }
+            .addOnFailureListener {
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName,"Error while updating the address details")
+
+            }
+
+
+
+
+
+
+
+    }
+    fun getAddressesList(activity: AddressListActivity) {
+        // The collection name for PRODUCTS
+        mFirestore.collection(Constants.ADDRESSES)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                // Here we get the list of boards in the form of documents.
+                Log.i(activity.javaClass.simpleName, document.documents.toString())
+                // Here we have created a new instance for address ArrayList.
+                val addressList: ArrayList<Address> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Boards ArrayList.
+                for (i in document.documents) {
+
+                    val address = i.toObject(Address::class.java)!!
+                    address.id = i.id
+
+                    addressList.add(address)
+                }
+
+                activity.successAddressListFromFirestore(addressList)
+            }
+            .addOnFailureListener { e ->
+                // Here call a function of base activity for transferring the result to it.
+
+                activity.hideProgressDialog()
+
+                Log.e(activity.javaClass.simpleName, "Error while getting the address list.", e)
+            }
+    }
+   fun addAddress(activity: AddEditAddressActivity,address:Address){
+       mFirestore.collection(Constants.ADDRESSES)
+           .document()
+           .set(address, SetOptions.merge())
+           .addOnSuccessListener {
+               activity.addUpdateAddressSuccess()
+           }
+           .addOnFailureListener {
+               activity.hideProgressDialog()
+               Log.e(activity.javaClass.simpleName,"Error while uploading the address!",it)
+           }
+   }
    fun updateMyCart(context: Context,cart_id: String,itemHashMap:HashMap<String,Any>){
        mFirestore.collection(Constants.CART_ITEMS)
            .document(cart_id)
@@ -87,7 +150,7 @@ class FireStoreClass {
        mFirestore.collection(Constants.PRODUCTS )
            .get()
            .addOnSuccessListener {querySnapShot ->
-               Log.e("Products List",querySnapShot.documents.toString())
+               Log.i("Products List",querySnapShot.documents.toString())
                val list:ArrayList<Product> =ArrayList()
                for (i in querySnapShot.documents){
                    val product=i.toObject(Product::class.java)
@@ -105,10 +168,6 @@ class FireStoreClass {
                Log.e(activity.javaClass.simpleName,"Error while getting the products list")
            }
    }
-
-
-
-
    fun checkIfItemExistsInCart(activity: ProductDetailsActivity,productID: String){
        mFirestore.collection(Constants.CART_ITEMS)
            //it should display if it is not our own product or already have that in our cart.
@@ -127,7 +186,7 @@ class FireStoreClass {
            .get()
 
            .addOnSuccessListener { createdQuery ->
-               Log.e(activity.javaClass.simpleName,createdQuery.documents.toString())
+               Log.i(activity.javaClass.simpleName,createdQuery.documents.toString())
                if (createdQuery.documents.size > 0){
                    //that means that the product is in our cart
                    activity.productExistsInCart()
@@ -138,7 +197,7 @@ class FireStoreClass {
            .addOnFailureListener {
                    e->
                activity.hideProgressDialog()
-               Log.e(activity.javaClass.simpleName,"Error while checking the existing cart list")
+               Log.e(activity.javaClass.simpleName,"Error while checking the existing cart list",e)
            }
 
     }//checkIfItemExistsInCart()
@@ -239,7 +298,7 @@ class FireStoreClass {
            .whereEqualTo(Constants.USER_ID,getCurrentUserID())
            .get()
            .addOnSuccessListener {document->
-               Log.e("Products list",document.documents.toString())
+               Log.i("Products list",document.documents.toString())
                val productsList:ArrayList<Product> =ArrayList()
 
                for (i in document.documents){
@@ -260,7 +319,7 @@ class FireStoreClass {
         mFirestore.collection(Constants.PRODUCTS)
             .get()
             .addOnSuccessListener {document->
-                Log.e(fragment.javaClass.simpleName,document.documents.toString())
+                Log.i(fragment.javaClass.simpleName,document.documents.toString())
                 var productsList:ArrayList<Product> = ArrayList()
                 for (i in document.documents){
                     var product=i.toObject(Product::class.java)!!
@@ -360,7 +419,7 @@ class FireStoreClass {
            .document(productID)
            .get()
            .addOnSuccessListener { document->
-               Log.e(activity.javaClass.simpleName,document.toString())
+               Log.i(activity.javaClass.simpleName,document.toString())
 
                val product=document.toObject(Product::class.java)
                if (product!=null)
@@ -372,5 +431,6 @@ class FireStoreClass {
               Log.e(activity::class.java.simpleName,"Sorry there is something went wrong while fetching the data from the cloud",e)
            }
    }
+
 
 }

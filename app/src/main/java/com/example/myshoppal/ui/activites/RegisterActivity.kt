@@ -50,7 +50,7 @@ class RegisterActivity : BaseActivity() {
     }
 
     //a fun to validate the new user entries
-    private fun validateRegisterDetails():Boolean{
+     private fun validateRegisterDetails():Boolean{
         return when{
             TextUtils.isEmpty(et_first_name.text.toString().trim { it <= ' '}) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_first_name),true)
@@ -85,9 +85,8 @@ class RegisterActivity : BaseActivity() {
                 true
             }
         }
-    }//function
-
-    private fun registerUser(){
+     }//function
+     private fun registerUser(){
      //check with validate function if the entries are validate or not
         if(validateRegisterDetails()){
             showProgressDialog(resources.getString(R.string.please_wait))

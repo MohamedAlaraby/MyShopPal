@@ -10,6 +10,7 @@ object Constants {
     //our collections in the cloud firestore
     const val USERS="users"
     const val PRODUCTS="products"
+    const val ADDRESSES="addresses"
 
     const val MY_SHOP_PAL_PREFRENCES:String="myshoppal_prefs"
     const val LOGGED_IN_USERNAME:String="loggedin_username"
@@ -39,7 +40,10 @@ object Constants {
 
     const val PROFILE_COMPLETED: String="profileCompleted"
     const val USER_PROFILE_IMAGE:String="user_profile_image"
-
+    const val HOME="HOME"
+    const val OFFICE="OFFICE"
+    const val OTHER="OTHER"
+    const val EXTRA_ADDRESS_DETAILS="AddressDetails"
     fun showImageChooser(activity: Activity){
         //an implicit intent to launch image selection of the phone storage
        val galleryIntent =Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
