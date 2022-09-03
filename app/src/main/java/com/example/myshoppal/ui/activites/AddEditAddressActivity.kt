@@ -8,7 +8,9 @@ import com.example.myshoppal.firestore.FireStoreClass
 import com.example.myshoppal.model.Address
 import com.example.myshoppal.utils.Constants
 import kotlinx.android.synthetic.main.activity_add_edit_address.*
-class AddEditAddressActivity : BaseActivity() {
+class AddEditAddressActivity : BaseActivity()
+
+{
     private var mAddressDetails:Address ?=null
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -128,8 +130,8 @@ class AddEditAddressActivity : BaseActivity() {
         }else{
             resources.getString(R.string.msg_your_address_updated_successfully)
         }
-
         Toast.makeText(this@AddEditAddressActivity,notifySuccessMessage,Toast.LENGTH_LONG).show()
+        setResult(RESULT_OK)
         finish()
     }
 }

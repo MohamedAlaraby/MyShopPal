@@ -14,19 +14,28 @@ import com.example.myshoppal.utils.Constants
 import com.example.myshoppal.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_cart_layout.view.*
 class MyCartListAdapter(
-   val context:Context,
-   val cartList:ArrayList<CartItem>
-): RecyclerView.Adapter<CartViewHolder>()
+    private val context: Context,
+    private val cartList: ArrayList<CartItem>,
+    private val updateCartItems: Boolean
+)
+    : RecyclerView.Adapter<CartViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         return CartViewHolder(
             LayoutInflater.from(context).inflate(R.layout.item_list_cart_layout,parent,false)
         )
     }
+    override fun getItemCount(): Int {
+    return cartList.size
+}
+    class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+
+
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
             val model=cartList[position]
             GlideLoader(context).loadProductPicture(model.image,holder.itemView.iv_cart_item_image)
-             holder.itemView.apply {
+            holder.itemView.apply {
                  tv_cart_item_title.text=model.title
                  tv_cart_item_price.text="$${model.price}"
                  tv_cart_quantity.text=model.cart_quantity
@@ -35,19 +44,32 @@ class MyCartListAdapter(
                 holder.itemView.apply {
                     ib_add_cart_item.visibility=View.GONE
                     ib_remove_cart_item.visibility=View.GONE
+                    if (updateCartItems){
+                        ib_delete_cart_item.visibility=View.VISIBLE
+                    }else{
+                        ib_delete_cart_item.visibility=View.GONE
+                    }
                     tv_cart_quantity.text=context.resources.getString(R.string.lbl_out_of_stock)
                     tv_cart_quantity.setTextColor(
                         ContextCompat.getColor(
                             context,R.color.colorSnackBarError
                         )
                     )
+
                 }
             }
-            else
-            {
+            else{
                 holder.itemView.apply {
-                    ib_add_cart_item.visibility=View.VISIBLE
-                    ib_remove_cart_item.visibility=View.VISIBLE
+                    if (updateCartItems){
+                        ib_add_cart_item.visibility=View.VISIBLE
+                        ib_remove_cart_item.visibility=View.VISIBLE
+                        ib_delete_cart_item.visibility=View.VISIBLE
+                    }else{
+                        ib_add_cart_item.visibility=View.GONE
+                        ib_remove_cart_item.visibility=View.GONE
+                        ib_delete_cart_item.visibility=View.GONE
+                    }
+
                     tv_cart_quantity.setTextColor(
                         ContextCompat.getColor(
                             context,R.color.colorSecondaryText
@@ -63,7 +85,7 @@ class MyCartListAdapter(
                     }
                 }
             }
-        holder.itemView.ib_remove_cart_item.setOnClickListener {
+            holder.itemView.ib_remove_cart_item.setOnClickListener {
             when(context){
                 is CartListActivity ->{
                     if (model.cart_quantity=="1"){
@@ -81,8 +103,8 @@ class MyCartListAdapter(
                     }
                 }
             }
-        }
-        holder.itemView.ib_add_cart_item.setOnClickListener {
+            }
+            holder.itemView.ib_add_cart_item.setOnClickListener {
             when(context){
                 is CartListActivity ->{
                     val cartQuantity=model.cart_quantity.toInt()
@@ -108,9 +130,6 @@ class MyCartListAdapter(
         }
 
 
+
     }//on bind()
-    override fun getItemCount(): Int {
-       return cartList.size
-    }
-    class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

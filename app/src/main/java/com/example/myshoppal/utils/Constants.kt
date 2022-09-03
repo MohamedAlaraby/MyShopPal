@@ -11,6 +11,7 @@ object Constants {
     const val USERS="users"
     const val PRODUCTS="products"
     const val ADDRESSES="addresses"
+    const val ORDERS="orders"
 
     const val MY_SHOP_PAL_PREFRENCES:String="myshoppal_prefs"
     const val LOGGED_IN_USERNAME:String="loggedin_username"
@@ -44,6 +45,9 @@ object Constants {
     const val OFFICE="OFFICE"
     const val OTHER="OTHER"
     const val EXTRA_ADDRESS_DETAILS="AddressDetails"
+    const val EXTRA_SELECT_ADDRESS="extra_select_address"
+    const val ADD_ADDRESS_REQUEST_CODE:Int=121
+    const val EXTRA_SELECTED_ADDRESS="extra_selected_address"
     fun showImageChooser(activity: Activity){
         //an implicit intent to launch image selection of the phone storage
        val galleryIntent =Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

@@ -1,4 +1,5 @@
 package com.example.myshoppal.ui.activites
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import com.example.myshoppal.firestore.FireStoreClass
 import com.example.myshoppal.model.CartItem
 import com.example.myshoppal.model.Product
 import com.example.myshoppal.ui.adapters.MyCartListAdapter
+import com.example.myshoppal.utils.Constants
 import kotlinx.android.synthetic.main.activity_cart.*
 class CartListActivity : BaseActivity() {
     private lateinit var mProductsList:ArrayList<Product>
@@ -16,6 +18,11 @@ class CartListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
         setUpActionBar()
+        btn_checkout.setOnClickListener{
+            val intent=Intent(this@CartListActivity,AddressListActivity::class.java)
+            intent.putExtra(Constants.EXTRA_SELECT_ADDRESS,true)
+            startActivity(intent)
+           }
 
     }
     private fun setUpActionBar(){
@@ -57,7 +64,7 @@ class CartListActivity : BaseActivity() {
 
         rv_cart_items_list.layoutManager=LinearLayoutManager(this@CartListActivity)
         rv_cart_items_list.setHasFixedSize(true)
-        rv_cart_items_list.adapter=MyCartListAdapter(this@CartListActivity,mCartItemsList)
+        rv_cart_items_list.adapter=MyCartListAdapter(this@CartListActivity,mCartItemsList,true)
         var subTotal:Double=0.0
         for ( i in mCartItemsList){
            val availableQuantity=i.stock_quantity.toInt()
