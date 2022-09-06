@@ -8,17 +8,43 @@ import androidx.fragment.app.Fragment
 import com.example.myshoppal.model.*
 import com.example.myshoppal.ui.activites.*
 import com.example.myshoppal.ui.fragments.DashboardFragment
+import com.example.myshoppal.ui.fragments.OrdersFragment
 import com.example.myshoppal.ui.fragments.ProductsFragment
+import com.example.myshoppal.ui.fragments.SoldProductsFragment
 import com.example.myshoppal.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.myshoppal.models.SoldProduct
 
 class FireStoreClass {
 
    private val mFirestore=FirebaseFirestore.getInstance()
+   fun getSoldProductsList(fragment: SoldProductsFragment){
+       mFirestore.collection(Constants.SOLD_PRODUCTS)
+           .whereEqualTo(Constants.USER_ID,getCurrentUserID())
+           .get()
+           .addOnSuccessListener { document->
+               var soldProductList:ArrayList<SoldProduct> = ArrayList()
+               var listItem:SoldProduct
+               for (item in document.documents){
+                   val listItem=item.toObject(SoldProduct::class.java)!!
+                   listItem.id=item.id
+                   soldProductList.add(listItem)
+               }
+               fragment.successGettingSoldProducts(soldProductList)
+
+           }.addOnFailureListener {
+               fragment.hideProgressDialog()
+               Log.e(fragment.javaClass.simpleName,"Error while getting the sold products",it)
+           }
+
+   }
+
+
+
    fun placeOrder(activity: CheckoutActivity,order: Order){
        mFirestore.collection(Constants.ORDERS)
            .document()
@@ -31,13 +57,70 @@ class FireStoreClass {
                 Log.e(activity.javaClass.simpleName,"Error while placing an order on the cloud",it)
            }
    }
+   fun updateAllDetails(activity: CheckoutActivity,cartList: ArrayList<CartItem>,order: Order){
+       val writeBatch=mFirestore.batch()
+       //This for loop for updating the stock quantity in the cloud.
+       for (cart in cartList){
+           val soldProduct = SoldProduct(
+          // Here the user id will be of product owner id.
+          user_id =cart.product_owner_id,
+          title =cart.title ,
+          price =cart.price ,
+          sold_quantity =cart.cart_quantity ,
+          image = cart.image,
+          order_id =order.title ,
+          order_date =order.order_date_time ,
+          sub_total_amount =order.sub_total_amount ,
+          shipping_charge =order.shipping_charge ,
+          total_amount = order.total_amount,
+          address=order.address,
+           )
+
+          val productReference=mFirestore.collection(Constants.SOLD_PRODUCTS)
+               .document(cart.product_id)
+           writeBatch.set(productReference,soldProduct)
+          }
+       //This for loop for deleting the cart items that the user already bought them.
+       for (cart in cartList){
+            val documentReference=mFirestore.collection(Constants.CART_ITEMS)
+                .document(cart.id)
+           writeBatch.delete(documentReference)
+       }
+       writeBatch.commit().addOnSuccessListener {
+           activity.allDetailsUpdatedSuccess()
+       }
+           .addOnFailureListener {
+               activity.hideProgressDialog()
+               Log.e(activity.javaClass.simpleName,"Error while updating all details after the order placed")
+
+           }
 
 
 
 
+   }
+   fun getMyOrdersList(fragment: OrdersFragment){
+        mFirestore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID,getCurrentUserID())
+            .get()
+            .addOnSuccessListener {allDocuments->
+                var ordersList=ArrayList<Order>()
+                for (doc in allDocuments.documents){
+                    val order=doc.toObject(Order::class.java)
+                    if (order != null) {
+                        order.id=doc.id
+                        ordersList.add(order)
+                    }
+                }
+               fragment.populateOrdersInUI(ordersList)
+            }
+            .addOnFailureListener {
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName,"Error while getting ht orders!",it)
+            }
 
-
-    fun deleteAddress(activity: AddressListActivity,addressID: String){
+   }
+   fun deleteAddress(activity: AddressListActivity,addressID: String){
         mFirestore.collection(Constants.ADDRESSES)
             .document(addressID)
             .delete()

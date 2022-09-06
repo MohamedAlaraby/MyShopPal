@@ -1,38 +1,51 @@
 package com.example.myshoppal.ui.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import com.example.myshoppal.databinding.FragmentOrdersBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myshoppal.R
+import com.example.myshoppal.firestore.FireStoreClass
+import com.example.myshoppal.model.Order
+import com.example.myshoppal.ui.adapters.MyOrdersListAdapter
+import kotlinx.android.synthetic.main.fragment_orders.*
 
-class OrdersFragment : Fragment() {
+class OrdersFragment : BaseFragment() {
 
-    private var _binding: FragmentOrdersBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //val notificationsViewModel =ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        _binding = FragmentOrdersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        val textView: TextView = binding.textNotifications
-        textView.text ="This is orders fragment"
+
+        val root = inflater.inflate(R.layout.fragment_orders, container, false)
         return root
     }
+    fun populateOrdersInUI(ordersList:ArrayList<Order>){
+        hideProgressDialog()
+        if (ordersList.size>0){
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+                fragment_orders_rv_my_order_items.visibility=View.VISIBLE
+                fragment_orders_tv_no_orders_found.visibility=View.GONE
+                fragment_orders_rv_my_order_items.layoutManager=LinearLayoutManager(requireActivity())
+                fragment_orders_rv_my_order_items.setHasFixedSize(true)
+                fragment_orders_rv_my_order_items.adapter=MyOrdersListAdapter(requireActivity(),ordersList)
+
+
+        }else{
+            fragment_orders_tv_no_orders_found.visibility=View.VISIBLE
+            fragment_orders_rv_my_order_items.visibility=View.GONE
+        }
     }
+    private fun getMyOrdersList(){
+        showProgressDialog(getString(R.string.please_wait))
+        FireStoreClass().getMyOrdersList(this)
+    }
+    override fun onResume() {
+        super.onResume()
+        getMyOrdersList()
+    }
+
 }

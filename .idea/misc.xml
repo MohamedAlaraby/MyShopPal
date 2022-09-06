@@ -28,6 +28,7 @@
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/ic_vector_remove.xml" value="0.2115" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/ic_vector_settings.xml" value="0.177" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/ic_vector_shopping_cart.xml" value="0.203" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/ic_vector_sold_products.xml" value="0.179" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/item_dashboard_background.xml" value="0.173" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/item_grey_border_background.xml" value="0.1245" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/drawable/item_primary_color_border_background.xml" value="0.2" />
@@ -42,16 +43,20 @@
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_orders.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_product_details.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_settings.xml" value="0.22" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_sold_products_details.xml" value="0.33" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/activity_user_profile.xml" value="0.22" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/cart_item_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/dialog_progress.xml" value="1.0" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/fragment_orders.xml" value="0.25" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/fragment_products.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/fragment_sold_products.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/item_address_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/item_dashboard_layout.xml" value="0.21171171171171171" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/item_list_cart_layout.xml" value="0.33" />
@@ -59,6 +64,7 @@
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/items_list_layout.xml" value="0.5" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/items_list_products_frag_layout.xml" value="0.33" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/items_row.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/layout/order_item_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/menu/add_product_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/moham/AndroidStudioProjects/MyShopPalFinal1/app/src/main/res/menu/dashboard_menu.xml" value="0.20416666666666666" />

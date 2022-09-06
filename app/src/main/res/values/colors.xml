@@ -30,7 +30,8 @@
 
 
     <color name="dashboard_item_details_bg">#f3f3f3</color>
-
+    <color name="order_status_in_process">#ff9800</color>
+    <color name="order_status_delivered">#8bc34a</color>
 
 
 </resources>

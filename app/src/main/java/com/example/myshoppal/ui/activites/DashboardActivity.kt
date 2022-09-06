@@ -29,13 +29,16 @@ class DashboardActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_dashboard)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_dashboard, R.id.navigation_products, R.id.navigation_orders
+                R.id.navigation_dashboard,
+                R.id.navigation_products,
+                R.id.navigation_orders,
+                R.id.navigation_sold_products
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-    }//oncreate
+    }//on create
 
     override fun onBackPressed() {
         doubleBackToExit()

@@ -16,6 +16,8 @@ class ProductDetailsActivity : BaseActivity(),View.OnClickListener
     private lateinit var mProductDetails: Product
     private var mProductID:String=""
     private var mProductOwnerID:String=""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
@@ -85,6 +87,7 @@ class ProductDetailsActivity : BaseActivity(),View.OnClickListener
     private fun addToCart(){
        val cartItem=CartItem(
            user_id =FireStoreClass().getCurrentUserID(),
+           product_owner_id=mProductOwnerID,
            product_id = mProductID,
            title = mProductDetails.title,
            price = mProductDetails.price,

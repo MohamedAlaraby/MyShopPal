@@ -20,6 +20,8 @@ class CheckoutActivity : BaseActivity() {
     private lateinit var mCartItemList:ArrayList<CartItem>
     private var mSubTotal:Double=0.0
     private var mTotalAmount:Double=0.0
+    private lateinit var mOrderDetails:Order
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,10 +102,10 @@ class CheckoutActivity : BaseActivity() {
             ll_checkout_place_order.visibility= View.GONE
         }
     }
-    fun placeAnOrder(){
+   private fun placeAnOrder(){
         showProgressDialog(getString(R.string.please_wait))
         if (mAddressDetails != null){
-            val order=Order(
+            mOrderDetails=Order(
             user_id = FireStoreClass().getCurrentUserID(),
             items = mCartItemList,
             address = mAddressDetails!!,
@@ -111,12 +113,16 @@ class CheckoutActivity : BaseActivity() {
             image = mCartItemList[0].image,
             sub_total_amount = mSubTotal.toString(),
             shipping_charge =(mSubTotal*0.1).toString(),
-            total_amount = mTotalAmount.toString()
+            total_amount = mTotalAmount.toString(),
+             order_date_time =System.currentTimeMillis()
             )
-            FireStoreClass().placeOrder(this@CheckoutActivity,order)
+            FireStoreClass().placeOrder(this@CheckoutActivity,mOrderDetails)
         }
     }
     fun orderPlacedSuccess(){
+      FireStoreClass().updateAllDetails(this, cartList =mCartItemList,mOrderDetails)
+    }
+    fun allDetailsUpdatedSuccess(){
         hideProgressDialog()
         Toast.makeText(this@CheckoutActivity,getString(R.string.msg_order_placed_success),Toast.LENGTH_LONG).show()
         val intent=Intent(this,DashboardActivity::class.java)
@@ -125,7 +131,6 @@ class CheckoutActivity : BaseActivity() {
         startActivity(intent)
         finish()
     }
-
 
 
 }

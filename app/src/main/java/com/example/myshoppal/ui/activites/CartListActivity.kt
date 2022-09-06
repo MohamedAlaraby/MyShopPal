@@ -75,7 +75,7 @@ class CartListActivity : BaseActivity() {
             if (subTotal > 0.0){
 
                  tv_sub_total.text="$${subTotal.toString()}"
-                 tv_shipping_charge.text="$${0.1*subTotal}"
+                 tv_shipping_charge.text="$${(0.1*subTotal).toFloat()}"
                  tv_total_amount.text=((subTotal)+(0.1*subTotal)).toString()
           }
         }
